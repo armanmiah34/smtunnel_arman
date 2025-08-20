@@ -50,7 +50,7 @@ dependencies {
 }
 ```
 
-```old update gradle kts
+```update gradle kts
 dependencies {
     implementation ("com.github.armanmiah34:smtunnel_arman:5.0")
 }
@@ -298,5 +298,6 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 ```
+
 
 
