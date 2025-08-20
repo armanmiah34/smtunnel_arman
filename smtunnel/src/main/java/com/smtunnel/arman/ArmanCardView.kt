@@ -13,7 +13,7 @@ import androidx.annotation.ColorInt
 import com.smtunnel.arman.internal.util.NeumorphResources
 
 @SuppressLint("NewApi")
-class NeumorphCardView @JvmOverloads constructor(
+class ArmanCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.neumorphCardViewStyle,
