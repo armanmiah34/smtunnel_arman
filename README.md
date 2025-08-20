@@ -34,16 +34,30 @@ allprojects {
     }
 }
 ```
+```gradle kts
+allprojects {
+    repositories {
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
 
 Then, add the library to your module `build.gradle`
 ```gradle
 dependencies {
-    implementation 'com.github.armanmiah34:smtunnel_arman:5.0'
+    implementation 'com.github.armanmiah34:smtunnel_arman:6.0'
+}
+```
+
+```update gradle kts
+dependencies {
+    implementation ("com.github.armanmiah34:smtunnel_arman:6.0")
 }
 ```
 
 ## Features
-- Draw a shadow background on widgets for Neumorphism.
+- Draw a shadow background on widgets for Arman.
   Supported on the following widgets:
   - ViewGroup: CardView
   - View: Button, FloatingActionButton, ImageView
@@ -55,7 +69,161 @@ dependencies {
 There is a [sample](https://github.com/fornewid/neumorphism/tree/main/sample) provided which shows how to use the library:
 
 ```xml
-<com.smtunnel.arman.NeumorphCardView
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    tools:context="com.smtunnel.armanapp.MainActivity">
+
+    <com.smtunnel.arman.ArmanCardView
+        android:id="@+id/edittext_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:hint="Enter something"
+            android:singleLine="true" />
+
+    </com.smtunnel.arman.ArmanCardView>
+
+    <com.smtunnel.arman.NeumorphTextView
+        android:id="@+id/textview"
+        style="@style/Widget.Neumorph.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Arman"
+        android:textColor="@color/background"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_card" />
+
+    <com.smtunnel.arman.ArmanCardView
+        android:id="@+id/flat_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toStartOf="@id/pressed_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview" />
+
+    <com.smtunnel.arman.ArmanCardView
+        android:id="@+id/pressed_card"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/flat_card"
+        app:layout_constraintTop_toBottomOf="@id/textview"
+        app:neumorph_shapeType="pressed" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/card_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="flat_card,pressed_card" />
+
+    <com.smtunnel.arman.NeumorphImageButton
+        android:id="@+id/flat_image_view"
+        style="@style/Widget.Neumorph.ImageButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_daynight_sky"
+        app:layout_constraintEnd_toStartOf="@id/pressed_image_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_barrier" />
+
+    <com.smtunnel.arman.NeumorphImageButton
+        android:id="@+id/pressed_image_view"
+        style="@style/Widget.Neumorph.ImageButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_daynight_activity"
+        app:layout_constraintEnd_toStartOf="@id/basin_image_view"
+        app:layout_constraintStart_toEndOf="@id/flat_image_view"
+        app:layout_constraintTop_toBottomOf="@id/card_barrier"
+        app:neumorph_shapeType="pressed" />
+
+    <com.smtunnel.arman.NeumorphImageButton
+        android:id="@+id/basin_image_view"
+        style="@style/Widget.Neumorph.ImageButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="48dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_daynight_food"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pressed_image_view"
+        app:layout_constraintTop_toBottomOf="@id/card_barrier"
+        app:neumorph_shapeType="basin" />
+
+    <com.smtunnel.arman.NeumorphFloatingActionButton
+        style="@style/Widget.Neumorph.FloatingActionButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_margin="24dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance" />
+
+    <com.smtunnel.arman.NeumorphButton
+        android:id="@+id/button"
+        style="@style/Widget.Neumorph.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:drawablePadding="8dp"
+        android:text="Button"
+        app:drawableEndCompat="@drawable/ic_right"
+        app:drawableStartCompat="@drawable/ic_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.smtunnel.arman.NeumorphFloatingActionButton
+        android:id="@+id/fab"
+        style="@style/Widget.Neumorph.FloatingActionButton"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_margin="24dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+```
+
+```xml
+<com.smtunnel.arman.ArmanCardView
     // Pre-defined style
     style="@style/Widget.Neumorph.CardView"
 
@@ -86,9 +254,7 @@ There is a [sample](https://github.com/fornewid/neumorphism/tree/main/sample) pr
     // Use a padding. (default=12dp)
     android:padding="12dp">
 
-    <!-- NeumorphCardView extends FrameLayout. So you can wrap childrens like this. -->
-    <ConstraintLayout />
-</com.smtunnel.arman.NeumorphCardView>
+</com.smtunnel.arman.ArmanCardView>
 
 <style name="CustomShapeAppearance">
     <item name="neumorph_cornerFamily">{rounded|oval}</item>
@@ -132,3 +298,4 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
 ```
+
